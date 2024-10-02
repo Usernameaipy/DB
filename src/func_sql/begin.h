@@ -1,8 +1,6 @@
-#ifndef START_H
-#define START_H
-void start(void);
-void menu(void);
-#include "../func_sql/begin.h"
+#ifndef BEGIN_H
+#define BEGIN_H
+void create(void);
 #endif
 #ifndef STDIO_STRING_SQLITE_H
 #define STDIO_STRING_SQLITE_H
