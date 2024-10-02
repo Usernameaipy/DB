@@ -7,4 +7,5 @@
 #ifndef START_H
 #define START_H
 void start(void);
+void menu(void);
 #endif
