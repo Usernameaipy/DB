@@ -5,7 +5,7 @@ BUILDDIR = ../build/
 all : DataBase
 
 DataBase : main.o start.o
-	$(CC) $(CFLAGS) main.o start.o -o $(BUILDDIR)DataBase
+	$(CC) $(CFLAGS) main.o start.o -o $(BUILDDIR)DataBase -lsqlite3
 
 main.o : starts/main.c starts/main.h
 	$(CC) $(CFLAGS) -c starts/main.c -o main.o
