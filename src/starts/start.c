@@ -28,6 +28,18 @@ void start(void) {
       }
       sqlite3_close(db);
       break;
+    case 4:
+      printf("Введите имя таблицы для вывода: ");
+      scanf("%99s", name_db);
+      exit = sqlite3_open(name_db, &db);
+      if(exit) {
+        fprintf(stderr, "Ошибка при открытии базы данных: %s\n", sqlite3_errmsg(db));
+      } else {
+        fprintf(stderr, "База данных успешно открыта!\n");
+        output(name_db, db);
+      }
+      sqlite3_close(db);
+      break;
     }
   }
 }
