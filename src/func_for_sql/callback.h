@@ -6,5 +6,5 @@
 #endif
 #ifndef CALLBACK_H
 #define CALLBACK_H
-int callback(void*, int, char**, char**);
+int callback(void *, int, char **, char **);
 #endif

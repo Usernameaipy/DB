@@ -4,6 +4,7 @@ void start(void) {
   char name_db[100] = {0};
   char table_name[100] = {0};
   int exit;
+  int id;
   sqlite3 *db;
   int choise = 3;
   while (choise != 0) {
@@ -35,8 +36,9 @@ void start(void) {
       printf("Введите имя базы данных, в которой храниться таблица: ");
       scanf("%99s", name_db);
       exit = sqlite3_open(name_db, &db);
-      if(exit) {
-        fprintf(stderr, "Ошибка при открытии базы данных: %s\n", sqlite3_errmsg(db));
+      if (exit) {
+        fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+                sqlite3_errmsg(db));
       } else {
         fprintf(stderr, "База данных успешно открыта!\n");
         printf("Введите имя таблицы, которую вы хотите вывести: ");
@@ -45,6 +47,22 @@ void start(void) {
       }
       sqlite3_close(db);
       break;
+    case 5:
+      printf("Введите имя базы данных, в которой храниться таблица: ");
+      scanf("%99s", name_db);
+      exit = sqlite3_open(name_db, &db);
+      if (exit) {
+        fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+                sqlite3_errmsg(db));
+      } else {
+        fprintf(stderr, "База данных успешно открыта!\n");
+        printf("Введите имя таблицы из которой вы хотите удалить элемент: ");
+        scanf("%100s", table_name);
+        printf("Введите ID, которая подлежит удалению: ");
+        scanf("%d", &id);
+        delete_elem(table_name, db, id);
+      }
+      sqlite3_close(db);
     }
   }
 }
