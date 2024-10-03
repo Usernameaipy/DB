@@ -1,6 +1,9 @@
 #include "start.h"
 
 void start(void) {
+  char name_db[100] = {0};
+  int exit;
+  sqlite3 *db;
   int choise = 3;
   while (choise != 0) {
     menu();
@@ -11,6 +14,19 @@ void start(void) {
       break;
     case 2:
       create_table();
+      break;
+    case 3:
+      printf("Введите имя таблицы для заполнения: ");
+      scanf("%99s", name_db);
+      exit = sqlite3_open(name_db, &db);
+      if (exit) {
+        fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+                sqlite3_errmsg(db));
+      } else {
+        fprintf(stderr, "База данных успешно открыта!\n");
+        insert(name_db, db);
+      }
+      sqlite3_close(db);
       break;
     }
   }
