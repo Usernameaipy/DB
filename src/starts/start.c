@@ -2,6 +2,7 @@
 
 void start(void) {
   char name_db[100] = {0};
+  char table_name[100] = {0};
   int exit;
   sqlite3 *db;
   int choise = 3;
@@ -16,7 +17,7 @@ void start(void) {
       create_table();
       break;
     case 3:
-      printf("Введите имя таблицы для заполнения: ");
+      printf("Введите имя базы данных в которой храниться таблица: ");
       scanf("%99s", name_db);
       exit = sqlite3_open(name_db, &db);
       if (exit) {
@@ -24,19 +25,23 @@ void start(void) {
                 sqlite3_errmsg(db));
       } else {
         fprintf(stderr, "База данных успешно открыта!\n");
-        insert(name_db, db);
+        printf("Введите имя таблицы для заполнения: ");
+        scanf("%100s", table_name);
+        insert(table_name, db);
       }
       sqlite3_close(db);
       break;
     case 4:
-      printf("Введите имя таблицы для вывода: ");
+      printf("Введите имя базы данных, в которой храниться таблица: ");
       scanf("%99s", name_db);
       exit = sqlite3_open(name_db, &db);
       if(exit) {
         fprintf(stderr, "Ошибка при открытии базы данных: %s\n", sqlite3_errmsg(db));
       } else {
         fprintf(stderr, "База данных успешно открыта!\n");
-        output(name_db, db);
+        printf("Введите имя таблицы, которую вы хотите вывести: ");
+        scanf("%100s", table_name);
+        output(table_name, db);
       }
       sqlite3_close(db);
       break;
@@ -51,5 +56,7 @@ void menu(void) {
   printf("Для вывода таблицы нажмите 4.\n");
   printf("Для удаления из таблицы нажмите 5.\n");
   printf("Для удаления таблицы нажмите 6.\n");
+  printf("Для вывода баз данных нажмите 7.\n");
+  printf("Для вывода таблиц хранимых в базе данных нажмите 8.\n");
   printf("Для выхожа нажмите 0.\n");
 }

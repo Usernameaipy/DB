@@ -17,13 +17,15 @@ void create(void) {
 }
 
 void create_table(void) {
-  const char *sql = "CREATE TABLE IF NOT EXISTS Users ("
+  const char *sql_template = "CREATE TABLE IF NOT EXISTS %s ("
                     "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
                     "Name TEXT NOT NULL,"
                     "Age INTEGER NOT NULL);";
   char name_db[100] = {0};
+  char table_name[100] = {0};
   char *errMsg = 0;
   int exit;
+  char sql[256] = {0};
   sqlite3 *db;
   int flag;
   printf("Введите имя базы данных: ");
@@ -34,6 +36,9 @@ void create_table(void) {
             sqlite3_errmsg(db));
   } else {
     fprintf(stderr, "База данных успешно открыта!\n");
+    printf("Введите имя создаваемой таблицы: ");
+    scanf("%100s", table_name);
+    snprintf(sql, sizeof(sql), sql_template, table_name);
     flag = sqlite3_exec(db, sql, 0, 0, &errMsg);
     if (flag != SQLITE_OK) {
       fprintf(stderr, "Ошибка при создании таблицы: %s\n", errMsg);
@@ -44,7 +49,7 @@ void create_table(void) {
   }
 }
 
-void insert(char *name_db, sqlite3 *db) {
+void insert(char *table_name, sqlite3 *db) {
   sqlite3_stmt *stmt;
   int rc;
   char sql[256] = {0};
@@ -58,7 +63,7 @@ void insert(char *name_db, sqlite3 *db) {
   printf("Введите значение для Age (INTEGER): ");
   scanf("%d", &column_3);
   snprintf(sql, sizeof(sql), "INSERT INTO %s (ID, Name, Age) VALUES (?, ?, ?);",
-           name_db);
+           table_name);
   rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
   if (rc != SQLITE_OK) {
     fprintf(stderr, "Ошибка при подготовке SQL запроса: %s\n",
@@ -73,16 +78,16 @@ void insert(char *name_db, sqlite3 *db) {
     fprintf(stderr, "Ошибка при выполнении SQL запроса: %s\n",
             sqlite3_errmsg(db));
   } else {
-    fprintf(stderr, "Данные успешно добавленный в таблицу %s\n", name_db);
+    fprintf(stderr, "Данные успешно добавленный в таблицу %s\n", table_name);
   }
   sqlite3_finalize(stmt);
 }
 
-void output(char* name_db, sqlite3* db){
+void output(char* table_name, sqlite3* db){
   char *errMsg = 0;
   char sql[256] = {0};
   int rc;
-  snprintf(sql, sizeof(sql), "SELECT * FROM %s;", name_db);
+  snprintf(sql, sizeof(sql), "SELECT * FROM %s;", table_name);
   rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
   if(rc!=SQLITE_OK) {
     fprintf(stderr, "Ошибка при выполнении запроса к базе данных: %s\n", errMsg);
