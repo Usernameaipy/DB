@@ -79,6 +79,11 @@ void start(void) {
       }
       sqlite3_close(db);
       break;
+    case 7:
+      printf("Введите имя базы данных, которую желаете удалить: ");
+      scanf("%99s", name_db);
+      delete_db(name_db);
+      break;
     }
   }
 }

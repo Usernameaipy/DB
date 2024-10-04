@@ -139,3 +139,11 @@ void delete_table(char *table_name, sqlite3 *db) {
   }
   sqlite3_finalize(stmt);
 }
+
+void delete_db(char *name_db) {
+  if (remove(name_db) == 0) {
+    printf("База данных успешно удалена!\n");
+  } else {
+    perror("Ошибка при удалении базы данных.\n");
+  }
+}
