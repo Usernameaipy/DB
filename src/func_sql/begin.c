@@ -118,3 +118,24 @@ void delete_elem(char *table_name, sqlite3 *db, int id) {
   }
   sqlite3_finalize(stmt);
 }
+
+void delete_table(char *table_name, sqlite3 *db) {
+  char sql[256] = {0};
+  int rc;
+  sqlite3_stmt *stmt;
+  snprintf(sql, sizeof(sql), "DROP TABLE IF EXISTS %s;", table_name);
+  rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+  if (rc != SQLITE_OK) {
+    fprintf(stderr, "Ошибка при подгтовке SQL запроса: %s\n",
+            sqlite3_errmsg(db));
+    return;
+  }
+  rc = sqlite3_step(stmt);
+  if (rc != SQLITE_DONE) {
+    fprintf(stderr, "Ошибка при выполнении SQL запроса: %s\n",
+            sqlite3_errmsg(db));
+  } else {
+    printf("Таблица %s успешно удалена!\n", table_name);
+  }
+  sqlite3_finalize(stmt);
+}

@@ -12,4 +12,5 @@ void create_table(void);
 void insert(char *, sqlite3 *);
 void output(char *, sqlite3 *);
 void delete_elem(char *, sqlite3 *, int);
+void delete_table(char *, sqlite3 *);
 #endif
