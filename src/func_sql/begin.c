@@ -147,3 +147,14 @@ void delete_db(char *name_db) {
     perror("Ошибка при удалении базы данных.\n");
   }
 }
+
+void table_ls(sqlite3 *db) {
+  int rc;
+  char *errMsg = 0;
+  const char *sql = "SELECT name FROM sqlite_master WHERE type='table';";
+  rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
+  if (rc != SQLITE_OK) {
+    fprintf(stderr, "Ошибка при выполнении SQL запроса: %s\n", errMsg);
+    sqlite3_free(errMsg);
+  }
+}
