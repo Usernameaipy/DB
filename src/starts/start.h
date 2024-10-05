@@ -9,5 +9,5 @@
 #define START_H
 void start(void);
 void menu(void);
-#include "../func_sql/begin.h"
+#include "../cases/case.h"
 #endif
