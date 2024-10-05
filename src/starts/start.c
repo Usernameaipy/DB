@@ -35,13 +35,13 @@ void start(void) {
 }
 
 void menu(void) {
-  printf("Для создания базы данных нажмите 1.\n");
-  printf("Для создания таблицы нажмите 2.\n");
-  printf("Для добавления в таблицу нажмите 3.\n");
-  printf("Для вывода таблицы нажмите 4.\n");
-  printf("Для удаления из таблицы нажмите 5.\n");
-  printf("Для удаления таблицы нажмите 6.\n");
-  printf("Для удаления базы данных нажмите 7.\n");
-  printf("Для вывода таблиц хранимых в базе данных нажмите 8.\n");
-  printf("Для выхожа нажмите 0.\n");
+  printf("To create a database, press 1.\n");
+  printf("To create a table, press 2.\n");
+  printf("To add to the table, press 3.\n");
+  printf("To display the table, press 4.\n");
+  printf("To delete from the table, press 5.\n");
+  printf("To delete a table, press 6.\n");
+  printf("To delete the database, press 7.\n");
+  printf("To display the tables stored in the database, press 8.\n");
+  printf("To exit, press 0.\n");
 }

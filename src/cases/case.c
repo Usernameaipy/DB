@@ -5,15 +5,15 @@ void case_three(void) {
   char table_name[100] = {0};
   int exit;
   sqlite3 *db;
-  printf("Введите имя базы данных в которой храниться таблица: ");
+  printf("Enter the name of the database where the table is stored: ");
   scanf("%99s", name_db);
   exit = sqlite3_open(name_db, &db);
   if (exit) {
-    fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+    fprintf(stderr, "Error opening the database: %s\n",
             sqlite3_errmsg(db));
   } else {
-    fprintf(stderr, "База данных успешно открыта!\n");
-    printf("Введите имя таблицы для заполнения: ");
+    fprintf(stderr, "The database has been successfully opened!\n");
+    printf("Enter the name of the table to fill in: ");
     scanf("%100s", table_name);
     insert(table_name, db);
   }
@@ -25,15 +25,15 @@ void case_four(void) {
   char table_name[100] = {0};
   int exit;
   sqlite3 *db;
-  printf("Введите имя базы данных, в которой храниться таблица: ");
+  printf("Enter the name of the database where the table is stored: ");
   scanf("%99s", name_db);
   exit = sqlite3_open(name_db, &db);
   if (exit) {
-    fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+    fprintf(stderr, "Error opening the database: %s\n",
             sqlite3_errmsg(db));
   } else {
-    fprintf(stderr, "База данных успешно открыта!\n");
-    printf("Введите имя таблицы, которую вы хотите вывести: ");
+    fprintf(stderr, "The database has been successfully opened!\n");
+    printf("Enter the name of the table you want to output: ");
     scanf("%100s", table_name);
     output(table_name, db);
   }
@@ -46,17 +46,17 @@ void case_five(void) {
   int exit;
   int id;
   sqlite3 *db;
-  printf("Введите имя базы данных, в которой храниться таблица: ");
+  printf("Enter the name of the database where the table is stored: ");
   scanf("%99s", name_db);
   exit = sqlite3_open(name_db, &db);
   if (exit) {
-    fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+    fprintf(stderr, "Error opening the database: %s\n",
             sqlite3_errmsg(db));
   } else {
-    fprintf(stderr, "База данных успешно открыта!\n");
-    printf("Введите имя таблицы из которой вы хотите удалить элемент: ");
+    fprintf(stderr, "The database has been successfully opened!\n");
+    printf("Enter the name of the table from which you want to delete the item: ");
     scanf("%100s", table_name);
-    printf("Введите ID, которая подлежит удалению: ");
+    printf("Enter the ID to be deleted: ");
     scanf("%d", &id);
     delete_elem(table_name, db, id);
   }
@@ -68,15 +68,15 @@ void case_six(void) {
   char table_name[100] = {0};
   int exit;
   sqlite3 *db;
-  printf("Введите имя базы данных, в которой храниться таблица: ");
+  printf("Enter the name of the database where the table is stored: ");
   scanf("%99s", name_db);
   exit = sqlite3_open(name_db, &db);
   if (exit) {
-    fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+    fprintf(stderr, "Error opening the database: %s\n",
             sqlite3_errmsg(db));
   } else {
-    fprintf(stderr, "База данных успешно открыта!\n");
-    printf("Введите имя таблицы, которую желаете удалить: ");
+    fprintf(stderr, "The database has been successfully opened!\n");
+    printf("Enter the name of the table you want to delete: ");
     scanf("%100s", table_name);
     delete_table(table_name, db);
   }
@@ -85,7 +85,7 @@ void case_six(void) {
 
 void case_seven(void) {
   char name_db[100] = {0};
-  printf("Введите имя базы данных, которую желаете удалить: ");
+  printf("Enter the name of the database you want to delete: ");
   scanf("%99s", name_db);
   delete_db(name_db);
 }
@@ -94,14 +94,14 @@ void case_eight(void) {
   char name_db[100] = {0};
   int exit;
   sqlite3 *db;
-  printf("Введите имя базы данных содержимое, которой хотите вывести: ");
+  printf("Enter the name of the database whose contents you want to output: ");
   scanf("%99s", name_db);
   exit = sqlite3_open(name_db, &db);
   if (exit) {
-    fprintf(stderr, "Ошибка при открытии базы данных: %s\n",
+    fprintf(stderr, "Error opening the database: %s\n",
             sqlite3_errmsg(db));
   } else {
-    printf("База данных успешно открыта!\n");
+    printf("The database has been successfully opened!\n");
     table_ls(db);
   }
   sqlite3_close(db);
